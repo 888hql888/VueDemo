@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // localStorage只能存字符串，如果存了其他类型，会自动调用这个类型的toString方法
+        window.localStorage.setItem('1','abc');    
+        window.localStorage.setItem('2',[10,20,30,40,50]);    
+        window.localStorage.setItem('3',{ name:"jack", age:16 });    
+
+        console.log([10,20,30,40,50].toString());
+        console.log({ name:"jack", age:16 }.toString());
+        
+    </script>
+</body>
+</html>
