@@ -74,7 +74,7 @@
     <!-- 右边主体 -->
     <el-main class="my-main">
       <div class="main-head">
-        <h4>江苏传智播客教育科技股份有限公司</h4>
+        <h4>自然科技头条新闻有限公司</h4>
 
         <el-dropdown trigger="click" @command="handlCommand">
           <span class="el-dropdown-link">

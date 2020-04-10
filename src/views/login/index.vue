@@ -31,7 +31,12 @@
         </el-form-item>
 
         <el-form-item>
-          <el-button :loading="isLoading" type="primary" style="width:100%;" @click="doLogin"> {{ msg }} </el-button>
+          <el-button
+            :loading="isLoading"
+            type="primary"
+            style="width:100%;"
+            @click="doLogin"
+          >{{ msg }}</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -42,8 +47,9 @@
 export default {
   data() {
     return {
-      msg:'登录',
-      isLoading:false,
+      res:"",
+      msg: "登录",
+      isLoading: false,
       // 这个属性控制获取验证码是否禁用
       btnDisabled: false,
       btnText: "获取验证码",
@@ -87,17 +93,14 @@ export default {
       this.btnText = "还有60秒";
 
       let timerID = setInterval(() => {
-        
-        if(sec == 59){
-
+        if (sec == 59) {
           this.form.code = "246810";
         }
 
         sec--;
         this.btnText = "还有" + sec + "秒";
 
-        if( sec == 0){
-
+        if (sec == 0) {
           //停止计时器
           clearInterval(timerID);
           //文字变回获取验证码
@@ -105,16 +108,14 @@ export default {
           //启用
           this.btnDisabled = false;
         }
-        
       }, 1000);
     },
     doLogin() {
       //找到表单元素，调用validate方法，做整个表单验证
       this.$refs["ruleForm"].validate(valid => {
         if (valid) {
-
           this.isLoading = true;
-          this.msg = "正在登录中..."
+          this.msg = "正在登录中...";
 
           // alert("全部通过");
           // 全部通过再发请求，注意：千万不能有空格
@@ -131,9 +132,10 @@ export default {
               // 本地存储只能存字符串
               // window.localStorage.setItem('userInfo',JSON.stringify(res.data.data))
               // 存到vuex,也存了本地存储
+              this.res=res
+              window.console.log(res)
               this.$message.success("登录成功！");
-              this.$store.commit('changeUserInfo',res.data.data);
-
+              this.$store.commit("changeUserInfo", res.data);
 
               this.$router.push("/home");
             })
@@ -143,7 +145,7 @@ export default {
               //只要进到catch就失败
               this.$message.error("手机号或验证码错误！");
               this.isLoading = false;
-              this.msg = '登录';
+              this.msg = "登录";
             });
         }
       });

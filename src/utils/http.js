@@ -1,7 +1,7 @@
 // 导入Vue
 import Vue from 'vue'
 // 导入路由对象
-import router from '../router/'
+// import router from '../router/'
 
 // 导入全局axios
 import axios from 'axios';
@@ -16,7 +16,7 @@ axios.defaults.transformResponse = [function (data) {
 
   // 对 data 进行任意转换处理
   // return JSON.parse(data); //这是axios默认的实现，我们现在不要它，因为它可能会造成大数字的精度丢失
-  try {e
+  try {
     // 如果能转换，我就转换再返回
     return JSONbig.parse(data);
   }
@@ -52,24 +52,24 @@ axios.interceptors.request.use(function (config) {
 
 
 // 添加响应拦截器
-axios.interceptors.response.use(function (response) {
-  // 对响应数据做点什么(成功响应调用)
-  // window.console.log('响应成功',response)
-  return response;
-}, function (error) {
-  // 对响应错误做点什么（响应出错调用）
-  // window.console.dir(error)
-  // return Promise.reject(error);
-  if( error.response.status == 401){
+// axios.interceptors.response.use(function (response) {
+//   // 对响应数据做点什么(成功响应调用)
+//   // window.console.log('响应成功',response)
+//   return response;
+// }, function (error) {
+//   // 对响应错误做点什么（响应出错调用）
+//   // window.console.dir(error)
+//   // return Promise.reject(error);
+//   if( error.response.status == 401){
 
-    //代表token有问题，要么就是还没登录，要么就是你伪造的token
-    //那就打回登录页面
-    Vue.prototype.$message.error('请先登录')
-    router.push('/login')
+//     //代表token有问题，要么就是还没登录，要么就是你伪造的token
+//     //那就打回登录页面
+//     Vue.prototype.$message.error('请先登录')
+//     router.push('/login')
 
-  }else{
+//   }else{
 
-    // 原来该怎么报错还怎么报错
-    return Promise.reject(error)
-  }
-});
+//     // 原来该怎么报错还怎么报错
+//     return Promise.reject(error)
+//   }
+// });
